@@ -31,8 +31,8 @@ function draw() {
             arr.forEach(element => {
                 let dis= element.distance(mouseX, mouseY);
                 let h =  element.height;
-                if (dis < h*2) {
-                    element.c += map(dis, 0, h, 255, 50, withinBounds=true);
+                if (dis < h*1.5) {
+                    element.c += map(dis, 0, h, 255, 30, withinBounds=true);
                     element.rect_draw()
                 }
             });

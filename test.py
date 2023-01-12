@@ -4,7 +4,7 @@ import json
 import math
 
 model = tf.keras.models.load_model("mnist.h5")
-f = open('mnist.json')
+f = open('json.json')
 number = json.load(f)
 f.close()
 number = np.array(number)
