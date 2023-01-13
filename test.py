@@ -19,5 +19,5 @@ while i < len(res[0]):
 
 argmax = np.argmax(res[0])
 max = max(res[0])
-print("argmax: ", argmax)
-print("max: ", max)
+print("redicted number: ", argmax)
+print("predicted confidence: ", max)
