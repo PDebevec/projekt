@@ -13,9 +13,15 @@ function toJson(arr2d) {
         url:"/predict",
         dataType: 'json',
         data: JSON.stringify(arr2),
-            contentType: 'application/json',
-            success: (data) => {
-               alert(JSON.parse(data));
+        contentType: 'application/json',
+        success: (data) => {
+            resdata = JSON.parse(data)
+            document.getElementById("number") = "prediced" + resdata[0][3]
+            document.getElementById("confidence") = Math.round(resdata[1][3]*100) + "% confidence"
+        },
+        error: (xhr, thrownError) => {
+            alert(xhr.status)
+            alert(thrownError)
         }
     })
     console.log(jsonstring)
@@ -30,7 +36,7 @@ function getNumber(arr2d){
     $.ajax({
         type:"get",
         url:"/draw",
-        data: reqnumbertoString(),
+        data: reqnumber.toString(),
         sucess: (data) => {
             number = JSON.parse(data)
         },

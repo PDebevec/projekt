@@ -20,7 +20,8 @@ app.post('/predict', (req, res) => {
     resdata = err.message
   })
   child.stdout.on('data', (data) => {
-    resdata = data.toString().split('\n')[2].split(' ')
+    resdata.push(data.toString().split('\n')[2].split(' '))
+    resdata.push(data.toString().split('\n')[3].split(' '))
   })
   child.kill("SIGKILL")
   res.json(JSON.stringify(resdata))
