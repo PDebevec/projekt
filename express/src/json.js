@@ -15,6 +15,7 @@ function toJson(arr2d) {
         data: JSON.stringify(arr2),
         contentType: 'application/json',
         success: (data) => {
+            
             resdata = JSON.parse(data)
             document.getElementById("number") = "prediced" + resdata[0][3]
             document.getElementById("confidence") = Math.round(resdata[1][3]*100) + "% confidence"
@@ -47,7 +48,6 @@ function getNumber(arr2d){
     })
     for (var i = 0; i < 28; i++) {
         for(var j = 0; j < 28; j++){
-            //arr2d[i][j].c = (map(number[i][j], 0, 1, 0, 255, true))
             arr2d[j][i].c = number[i][j]
             arr2d[j][i].rect_draw()
         }
