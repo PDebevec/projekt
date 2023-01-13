@@ -1,16 +1,15 @@
 let arr2d = [];
 p5.disableFriendlyErrors = true
+wah = (innerHeight/1.5)
+sizepx = wah / 28
 
 function setup() {
-    wah = (innerHeight/1.75)
-    createCanvas(wah, wah);
-    resolution = 28;
-    size = wah / resolution;
+    createCanvas(wah, wah)
     //frameRate(60)
-    for(var i = 0; i < resolution; i++){
+    for(var i = 0; i < 28; i++){
         let arr = [];
-        for(var j = 0; j < resolution; j++){
-            arr.push(new rectangle(size*i, size*j, size, size))
+        for(var j = 0; j < 28; j++){
+            arr.push(new rectangle(sizepx*i, sizepx*j, sizepx, sizepx))
         }
         arr2d.push(arr);
     }
@@ -19,23 +18,25 @@ function setup() {
     stroke(220);
     arr2d.forEach(arr => {
         arr.forEach(element => {
-            element.rect_draw();
+            element.rect_draw()
         });
     });
 }
 
 function draw() {
-    //console.log(frameRate());
+    //console.log(frameRate())
     if(mouseIsPressed){
-        arr2d.forEach(arr => {
+        if((mouseX < wah && mouseX > 0) && (mouseY < wah && mouseY > 0)){
+            arr2d.forEach(arr => {
             arr.forEach(element => {
-                let dis= element.distance(mouseX, mouseY);
-                let h =  element.height;
+                let dis= element.distance(mouseX, mouseY)
+                let h =  element.height
                 if (dis < h*1.5) {
-                    element.c += map(dis, 0, h, 255, 30, withinBounds=true);
+                    element.c += map(dis, 0, h, 255, 30, withinBounds=true)
                     element.rect_draw()
                 }
             });
         });
+        }
     }
 }
