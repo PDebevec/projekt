@@ -1,5 +1,5 @@
 let arr2d = [];
-p5.disableFriendlyErrors = true
+//p5.disableFriendlyErrors = true
 wah = (innerHeight/1.5)
 sizepx = wah / 28
 
