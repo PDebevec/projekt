@@ -1,16 +1,16 @@
 const { json } = require("body-parser");
 
 module.exports = {
-    predict: (fs, img)=> {
+    predict: (fs, img, token)=> {
         //console.log(img)
-        fs.writeFileSync("json.json", JSON.stringify(img), (err) =>{
+        fs.writeFileSync("jsonImage/"+token+".json", JSON.stringify(img), (err) =>{
             console.log(err);
         })
 
         return new Promise((resfun) => {
 
             const {spawn} = require("child_process")
-            const child = spawn('python3', ["getnum.py", "json.json"])
+            const child = spawn('python3', ["getnum.py", "jsonImage/"+token.toString()+".json"])
             resdata = null
             child.stderr.on('data', (data) => {
                 //console.log(data.toString());
