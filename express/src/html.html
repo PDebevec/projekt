@@ -2,10 +2,10 @@
 <html>
   <head>
     <!-- https://levelup.gitconnected.com/how-to-load-external-javascript-files-from-the-browser-console-8eb97f7db778 -->
-    <meta http-equiv="Content-Security-Policy"
+    <!--meta http-equiv="Content-Security-Policy"
     content="
     script-src 'self' ajax.googleapis.com cdn.jsdelivr.net 'unsafe-inline';
-    ">
+    "-->
     <!--meta http-equiv="Content-Security-Policy" content="default-src 'self';
     script-src 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://ajax.googleapis.com;
     script-src-attr 'unsafe-inline' https://cdn.jsdelivr.net https://ajax.googleapis.com;"-->
@@ -19,12 +19,12 @@
   <body>
     <ul>
       <li id="li"><div>
-        <button onclick="location.reload()" style="height: 25px;">reset</button>
-        <button onclick="toJson(arr2d)" style="height: 25px;">JSON</button>
+        <button onclick="reset(arr2d)" style="height: 25px;">reset</button>
+        <button onclick="toJson(arr2d)" style="height: 25px;">predict</button>
+        <input type="number" max="9" min="0" onkeydown="return false" id="reqnumber" style="height: 25px; width: 100px;">
         <button onclick="getNumber(arr2d)" style="height: 25px;">draw</button>
-        <input type="text" id="reqnumber" style="height: 25px;">
       </div></li>
-      <li id="number">predicted _</li>
+      <li id="number">predicted: _</li>
       <li id="confidence">__% confidence</li>
     </ul>
     <main>

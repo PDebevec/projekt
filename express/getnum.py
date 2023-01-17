@@ -16,5 +16,5 @@ res  = model.predict(number)
 
 argmax = np.argmax(res[0])
 max = max(res[0])
-print("redicted number: ", argmax)
+print("predicted number: ", argmax)
 print("predicted confidence: ", max)

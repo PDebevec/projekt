@@ -1,7 +1,7 @@
 from tensorflow import keras
 import numpy as np
 import sys
-import json
+#import json
 import random
 
 (x_train, y_train), (x_test, y_test) =  keras.datasets.mnist.load_data()
@@ -21,7 +21,8 @@ while rand < len(y_test):
     rand += 1
 
 jsonlist = x_test[index].tolist()
-jsonstring = json.dumps(jsonlist)
-jsonfile = open("mnist.json", "w")
-jsonfile.write(jsonstring)
-jsonfile.close()
+print(jsonlist)
+#jsonstring = json.dumps(jsonlist)
+#jsonfile = open("mnist.json", "w")
+#jsonfile.write(jsonstring)
+#jsonfile.close()

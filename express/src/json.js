@@ -15,39 +15,52 @@ function toJson(arr2d) {
         contentType: 'application/json',
         data: jsonstring,
         success: (data) => {
-            resdata = JSON.parse(data)
-            document.getElementById("number").innerHTML = "prediced " + resdata[0][3]
-            document.getElementById("confidence").innerHTML = Math.round(resdata[1][3]*100) + "% confidence"
+            resdata = JSON.parse(data).split(' ')
+            //console.log(resdata)
+            document.getElementById("number").innerHTML = "predicted: " + resdata[3][0]
+            document.getElementById("confidence").innerHTML = Math.round(Number(resdata[6])*100) + "% confidence"
         },
         error: (xhr, thrownError) => {
-            alert(xhr.status)
-            alert(thrownError)
+            console.log(xhr.status)
+            console.log(thrownError)
         }
     })
-    console.log(jsonstring)
-    return jsonstring
+    //console.log(jsonstring)
+    //return jsonstring
 }
 
 function getNumber(arr2d){
-    reqnumber = document.getElementById('reqnumber')
-    number = null;
+    reqnumber = document.getElementById('reqnumber').value
     
     $.ajax({
         type:"get",
         url:"/draw",
-        data: reqnumber.toString(),
-        sucess: (data) => {
-            number = JSON.parse(data)
+        dataType: "json",
+        //contentType: 'text/plain',
+        data: { number: reqnumber.toString() },
+        success: (data) => {
+            number = JSON.parse(JSON.parse(data))
+            for (var i = 0; i < 28; i++) {
+                for(var j = 0; j < 28; j++){
+                    arr2d[j][i].c = number[i][j]
+                    arr2d[j][i].rect_draw()
+                }
+            }
         },
         error: (xhr, thrownError) => {
-            alert(xhr.status)
-            alert(thrownError)
+            console.log(xhr.status)
+            console.log(thrownError)
         }
     })
-    for (var i = 0; i < 28; i++) {
-        for(var j = 0; j < 28; j++){
-            arr2d[j][i].c = number[i][j]
-            arr2d[j][i].rect_draw()
-        }
-    }
+}
+
+function reset(arr2d) {
+    document.getElementById("number").innerHTML = "predicted: _"
+    document.getElementById("confidence").innerHTML = "__% confidence"
+    arr2d.forEach(arr => {
+        arr.forEach(element => {
+            element.c = 0
+            element.rect_draw()
+        });
+    });
 }

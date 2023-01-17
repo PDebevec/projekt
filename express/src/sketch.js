@@ -4,7 +4,7 @@ wah = (innerHeight/1.5)
 sizepx = wah / 28
 
 function setup() {
-    createCanvas(wah, wah)
+    createCanvas(wah+1, wah+1)
     //frameRate(60)
     for(var i = 0; i < 28; i++){
         let arr = [];
@@ -28,15 +28,15 @@ function draw() {
     if(mouseIsPressed){
         if((mouseX < wah && mouseX > 0) && (mouseY < wah && mouseY > 0)){
             arr2d.forEach(arr => {
-            arr.forEach(element => {
-                let dis= element.distance(mouseX, mouseY)
-                let h =  element.height
-                if (dis < h*1.5) {
-                    element.c += map(dis, 0, h, 255, 30, withinBounds=true)
-                    element.rect_draw()
-                }
-            });
-        });
+                arr.forEach(element => {
+                    let dis= element.distance(mouseX, mouseY)
+                    let h =  element.height
+                    if (dis < h*1.5) {
+                        element.c += map(dis, 0, h, 255, 40, withinBounds=true)
+                        element.rect_draw()
+                    }
+                })
+            })
         }
     }
 }
