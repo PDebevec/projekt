@@ -3,7 +3,8 @@ import tensorflow as tf
 from tensorflow import keras
 from keras.layers import Dense, Flatten
 from keras.layers import Conv2D, Dropout, MaxPooling2D
-import json
+from keras.layers.normalization import batch_normalization
+#import json
 
 (x_train, y_train), (x_test, y_test) =  tf.keras.datasets.mnist.load_data()
 y_train = keras.utils.to_categorical(y_train, 10)
@@ -13,25 +14,46 @@ x_test = x_test.astype('float32')
 
 input_shape = (28, 28, 1)
 batch = 128
-epochs = 15
+epochs = 2
 model = tf.keras.models.Sequential()
-model.add(Conv2D(32, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
+""" model.add(Conv2D(32, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(64, (3, 3), activation='relu'))
+model.add(Conv2D(32, (3, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
 model.add(Dropout(0.2))
 model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.3))
+model.add(Dense(32, activation='relu'))
+model.add(Dropout(0.3))
+model.add(Dense(16, activation='relu'))
+model.add(Dropout(0.4)) """
+model.add(Conv2D(filters=64, kernel_size = (3,3), activation="relu", input_shape=input_shape))
+model.add(Conv2D(filters=64, kernel_size = (3,3), activation="relu"))
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(tf.keras.layers.BatchNormalization())
+
+model.add(Conv2D(filters=128, kernel_size = (3,3), activation="relu"))
+model.add(Conv2D(filters=128, kernel_size = (3,3), activation="relu"))
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(tf.keras.layers.BatchNormalization())    
+
+model.add(Conv2D(filters=256, kernel_size = (3,3), activation="relu"))
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(tf.keras.layers.BatchNormalization())
+    
+model.add(Flatten())
+model.add(Dense(512,activation="relu"))
+
 model.add(Dense(10, activation='softmax'))
 
 model.compile(loss=keras.losses.MeanSquaredError(),
               optimizer=keras.optimizers.SGD(0.05),
               metrics=['accuracy'])
-model.fit(x_train, y_train, shuffle=True,
-          batch_size=batch, epochs=epochs, verbose=1,
+model.fit(x_train, y_train, shuffle=True, steps_per_epoch=300,
+          batch_size=batch, epochs=epochs,
           validation_data=(x_test, y_test), validation_split=0.1,
-          use_multiprocessing=True, workers=2)
+          use_multiprocessing=True, workers=4)
 
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])

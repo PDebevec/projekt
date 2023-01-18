@@ -10,23 +10,20 @@ function toJson(arr2d) {
     var jsonstring = JSON.stringify(arr2)
     $.ajax({
         type:"post",
-        url:"/predict",
+        url:"/predict/py",
         dataType: 'json',
         contentType: 'application/json',
         data: jsonstring,
         success: (data) => {
-            resdata = JSON.parse(data).split(' ')
-            //console.log(resdata)
-            document.getElementById("number").innerHTML = "predicted: " + resdata[3][0]
-            document.getElementById("confidence").innerHTML = Math.round(Number(resdata[6])*100) + "% confidence"
+            jsondata = JSON.parse(JSON.parse(data))
+            document.getElementById("number").innerHTML = "predicted: " + jsondata.predicted_number
+            document.getElementById("confidence").innerHTML = Math.round(Number(jsondata.predicted_confidence)*100) + "% confidence"
         },
         error: (xhr, thrownError) => {
             console.log(xhr.status)
             console.log(thrownError)
         }
     })
-    //console.log(jsonstring)
-    //return jsonstring
 }
 
 function getNumber(arr2d){
@@ -34,9 +31,9 @@ function getNumber(arr2d){
     
     $.ajax({
         type:"get",
-        url:"/draw",
+        url:"/draw/py",
         dataType: "json",
-        //contentType: 'text/plain',
+        contentType: 'application/json',
         data: { number: reqnumber.toString() },
         success: (data) => {
             number = JSON.parse(JSON.parse(data))
@@ -57,6 +54,7 @@ function getNumber(arr2d){
 function reset(arr2d) {
     document.getElementById("number").innerHTML = "predicted: _"
     document.getElementById("confidence").innerHTML = "__% confidence"
+    document.getElementById("reqnumber").value = ""
     arr2d.forEach(arr => {
         arr.forEach(element => {
             element.c = 0

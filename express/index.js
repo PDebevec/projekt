@@ -40,6 +40,16 @@ app.get('/draw/', async (req, res) => {
   res.json(await image(req.query.number))
 })
 
+app.post('/predict/py', async (req, res) => {
+  const { predict2 } = require("./getprediction")
+  res.json(await predict2(req.body))
+})
+
+app.get('/draw/py', async (req, res) => {
+  const { image2 } = require("./getprediction")
+  res.json(await image2(req.query.number))
+})
+
 let sessions = []
 setInterval(() => {
   if(session.length > 100){

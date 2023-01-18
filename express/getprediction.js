@@ -42,5 +42,49 @@ module.exports = {
                 resfun(JSON.stringify(resdata))
             })
         })
+    },
+
+    predict2: (data) => {
+        return new Promise((resfun) => {
+            const http = require("http")
+            let req = http.request({
+                hostname: "localhost",
+                port: 8000,
+                path: "/predict",
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': JSON.stringify(data).length,
+                }
+            }, (res) => {
+                res.on('data', (chunk) => {
+                    resfun(JSON.stringify(chunk.toString()))
+                })
+            })
+            req.write(JSON.stringify(data))
+            req.end()
+        })
+    },
+
+    image2 : (data) => {
+        return new Promise((resfun) => {
+            const http = require("http")
+            let req = http.request({
+                hostname: "localhost",
+                port: 8000,
+                path: "/image",
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': JSON.stringify(data).length,
+                }
+            }, (res) => {
+                res.on('data', (chunk) => {
+                    resfun(JSON.stringify(chunk.toString()))
+                })
+            })
+            req.write(JSON.stringify(data))
+            req.end()
+        })
     }
 }
