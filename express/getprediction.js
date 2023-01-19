@@ -1,7 +1,5 @@
-const { json } = require("body-parser");
-
 module.exports = {
-    predict: (fs, img, token)=> {
+    /* predict: (fs, img, token)=> {
         //console.log(img)
         fs.writeFileSync("jsonImage/"+token+".json", JSON.stringify(img), (err) =>{
             console.log(err);
@@ -24,9 +22,9 @@ module.exports = {
                 resfun(JSON.stringify(resdata))
             })
         })
-    },
+    }, */
 
-    image: (num) => {
+    /* image: (num) => {
         return new Promise((resfun) => {
             const {spawn} = require("child_process")
             const child = spawn("python3", ["getimg.py", num.toString()])
@@ -42,7 +40,7 @@ module.exports = {
                 resfun(JSON.stringify(resdata))
             })
         })
-    },
+    }, */
 
     predict2: (data) => {
         return new Promise((resfun) => {

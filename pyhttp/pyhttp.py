@@ -41,4 +41,4 @@ def image():
 
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    app.run(port=8000, ssl_context=('../Certificate/servercert.pem', '../Certificate/key.pem', '../Certificate/CA/cacert.pem'))

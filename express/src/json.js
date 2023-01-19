@@ -16,8 +16,8 @@ function toJson(arr2d) {
         data: jsonstring,
         success: (data) => {
             jsondata = JSON.parse(JSON.parse(data))
-            document.getElementById("number").innerHTML = "predicted: " + jsondata.predicted_number
-            document.getElementById("confidence").innerHTML = Math.round(Number(jsondata.predicted_confidence)*100) + "% confidence"
+            document.getElementById("number").innerHTML = "predicted: <b>" + jsondata.predicted_number + "</b>"
+            document.getElementById("confidence").innerHTML = "<b>" + Math.round(Number(jsondata.predicted_confidence)*100) + "%</b> confidence"
         },
         error: (xhr, thrownError) => {
             console.log(xhr.status)
@@ -61,4 +61,13 @@ function reset(arr2d) {
             element.rect_draw()
         });
     });
+}
+
+function drawpredicted(arr, arr2d){
+    for (let i = 0; i < 28; i++) {
+        for (let j = 0; j < 28; j++) {
+            arr2d[j][i].c = Number(arr[i][j]) * 255
+            arr2d[j][i].rect_draw()
+        }
+    }
 }
