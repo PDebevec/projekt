@@ -12,7 +12,7 @@ x_test = x_test.astype('float32')
 
 input_shape = (28, 28, 1)
 batch = 128
-epochs = 1
+epochs = 5
 model = tf.keras.models.Sequential()
 """ model.add(Conv2D(32, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -49,7 +49,7 @@ model.compile(#loss=keras.losses.MeanSquaredError(),
               loss=keras.losses.CategoricalCrossentropy(),
               optimizer=keras.optimizers.SGD(0.05),
               metrics=['accuracy'])
-model.fit(x_train, y_train, shuffle=True, steps_per_epoch=100,
+model.fit(x_train, y_train, shuffle=True, steps_per_epoch=250,
           batch_size=batch, epochs=epochs,
           validation_data=(x_test, y_test), validation_split=0.1,
           use_multiprocessing=True, workers=4)

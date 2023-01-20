@@ -14,16 +14,20 @@
   </head>
   <body>
     <ul>
-      <li id="li"><div>
+      <li><div>
         <button onclick="reset(arr2d)" style="height: 25px;">reset</button>
         <button onclick="toJson(arr2d)" style="height: 25px;">predict</button>
         <input type="number" max="9" min="0" onkeydown="return false" id="reqnumber" style="height: 25px; width: 100px;">
         <button onclick="getNumber(arr2d)" style="height: 25px;">draw</button>
       </div></li>
-      <li id="number">predicted: _</li>
-      <li id="confidence">__% confidence</li>
     </ul>
-    <main>
-    </main>
+    <ul>
+      <li><main></main></li>
+      <li><ul>
+        <li id="su">supervised predicted: _ ... __% confidence</li>
+        <li id="unsu">unsupervised predicted: _ ... __% confidence</li>
+      </ul>
+      </li>
+    </ul>
   </body>
 </html>

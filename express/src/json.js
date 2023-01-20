@@ -16,8 +16,14 @@ function toJson(arr2d) {
         data: jsonstring,
         success: (data) => {
             jsondata = JSON.parse(JSON.parse(data))
-            document.getElementById("number").innerHTML = "predicted: <b>" + jsondata.predicted_number + "</b>"
-            document.getElementById("confidence").innerHTML = "<b>" + Math.round(Number(jsondata.predicted_confidence)*100) + "%</b> confidence"
+            document.getElementById("su").innerHTML =
+            "supervised predicted: <b>" + jsondata.su_predicted + "</b> ... <b>" + Math.round(Number(jsondata.su_confidence)*100) + "% </b>confidence"
+            document.getElementById("unsu").innerHTML =
+            "unsupervised predicted: <b>" + jsondata.un_predicted + "</b> ... <b>" + Math.round(Number(jsondata.un_confidence)*100) + "% </b>confidence"
+
+            /* document.getElementById("unsu").innerHTML = "unsupervised predicted: <b>" + jsondata.un_predicted_number + "</b>"
+            document.getElementById("number").innerHTML = "supervised predicted: <b>" + jsondata.su_predicted + "</b>"
+            document.getElementById("confidence").innerHTML = "<b>" + Math.round(Number(jsondata.su_confidence)*100) + "%</b> confidence" */
         },
         error: (xhr, thrownError) => {
             console.log(xhr.status)
@@ -52,8 +58,8 @@ function getNumber(arr2d){
 }
 
 function reset(arr2d) {
-    document.getElementById("number").innerHTML = "predicted: _"
-    document.getElementById("confidence").innerHTML = "__% confidence"
+    document.getElementById("su").innerHTML = "supervised predicted: _ ... __% confidence"
+    document.getElementById("unsu").innerHTML = "unsupervised predicted: _ ... __% confidence"
     document.getElementById("reqnumber").value = ""
     arr2d.forEach(arr => {
         arr.forEach(element => {
